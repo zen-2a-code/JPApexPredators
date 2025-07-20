@@ -24,15 +24,22 @@ struct PredatorDetails: View {
                         .overlay{
                             LinearGradient(stops: [Gradient.Stop(color: .clear, location: 0.9), Gradient.Stop(color: .black, location: 1)], startPoint: .top, endPoint: .bottom)
                         }
-                    
-                    // dino image
-                    Image(predator.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: geo.size.width / 1.5, height: geo.size.height / 3.7)
-                        .scaleEffect(x: -1)
-                        .shadow(color: .black, radius: 7)
-                        .offset(y: 20)
+                    NavigationLink {
+                        Image(predator.image)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(x: -1)
+                            
+                        
+                    } label: {
+                        Image(predator.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geo.size.width / 1.5, height: geo.size.height / 3.7)
+                            .scaleEffect(x: -1)
+                            .shadow(color: .black, radius: 7)
+                            .offset(y: 20)
+                    }
                 }
                 
                 // Dino Name

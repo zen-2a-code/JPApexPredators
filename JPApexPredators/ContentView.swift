@@ -14,12 +14,28 @@ struct ContentView: View {
     @State var searchText = ""
     @State var isAlphabeticallyOrdered = false
     @State var currentTypeSelection: APType = .all
-
+    @State var filteredByMovieSelection = "All Movies"
+    
+//    var filteredDinos: [ApexPredator] {
+//        predators.filterByType(by: currentTypeSelection)
+//        predators.filterByMovie(by: filteredByMovieSelection)
+//        predators.sort(by: isAlphabeticallyOrdered)
+//        return predators.search(for: searchText)
+//    }
+    
     var filteredDinos: [ApexPredator] {
-        predators.filter(by: currentTypeSelection)
-        
-        predators.sort(by: isAlphabeticallyOrdered)
-        return predators.search(for: searchText)
+        return predators.filterByType(by: currentTypeSelection)
+            .filterByMovie(by: filteredByMovieSelection)
+            .sort(by: isAlphabeticallyOrdered)
+            .search(for: searchText)
+    }
+    
+    var moviePicker: some View {
+        Picker("Filter", selection: $filteredByMovieSelection.animation()) {
+            ForEach(predators.allMovies.sorted(), id: \.self) { movie in
+                Label(movie, systemImage: "film")
+            }
+        }
     }
 
     var body: some View {
@@ -81,6 +97,10 @@ struct ContentView: View {
                                 type in
                                 Label(type.rawValue.capitalized, systemImage: type.icon)
                             }
+                        }
+                        
+                        Menu("Choose a movie") {
+                            moviePicker
                         }
 
                     } label: {

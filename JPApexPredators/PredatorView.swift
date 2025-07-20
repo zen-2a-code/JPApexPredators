@@ -13,7 +13,7 @@ struct PredatorView: View {
     @State var isSateliteViewActive = false
     @State var position: MapCameraPosition
     
-    var body: some View {
+    var body: some View {   
         Map(position: $position) {
             ForEach (allPredators.allApexPredators) {
                 predator in
